@@ -48,6 +48,10 @@ body, html {
     color: white;
 }
 
+#enter:hover {
+    background-color: #a090a5;
+}
+
 @media screen and (max-width: 395px) {
     #form {
         grid-template-columns: repeat(1,1fr);
