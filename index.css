@@ -84,9 +84,34 @@ body, html {
     color: white;
 }
 
-@media screen and (max-width: 800px) {
+#task-list, #inProgress-list, #complete-list {
+    height: 100%;
+}
+
+@media screen and (max-width: 1120px) {
     #columns {
         grid-template-columns: repeat(1,1fr);
         row-gap: 10px;
     }
+}
+
+/* task elements */
+.added-task {
+    width: 90%;
+    height: fit-content;
+    padding: 5px;
+    margin-top: 5px;
+    background-color: #a090a5;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 2px black;
+    border-radius: 5px;
+    color: white;
+}
+
+.delete {
+    border: none;
+    background-color: white;
+    border-radius: 5px;
+    float: right;
 }
