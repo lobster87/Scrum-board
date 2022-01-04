@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <style>
+    #getData {
+        width: 250px;
+        height: 200px;
+        padding: 10px;
+        border: 1px solid #4f4d4d;
+    }
+    #dragData {
+        background-color: blue;
+        height: 150px;
+        width: 150px;
+    }
+    </style>
+    <script>
+    function allowDrop(even) {
+        even.preventDefault();
+    }
+ 
+    function drag(even) {
+        even.dataTransfer.setData("text", even.target.id);
+        console.log('pickup')
+    }
+ 
+    function drop(even) {
+        even.preventDefault();
+        var fetchData = even.dataTransfer.getData("text");
+        console.log(fetchData)
+        even.target.appendChild(document.getElementById(fetchData));
+        console.log('drop')
+    }
+    </script>
+</head>
+ 
+<body>
+    <h3>Drag the GeekforGeeks image into the rectangle:</h3>
+    <div id="getData"
+         ondrop="drop(event)"
+         ondragover="allowDrop(event)">
+      </div>
+
+      <div id="getData"
+      ondrop="drop(event)"
+      ondragover="allowDrop(event)">
+   </div>
+    <div id="dragData"
+         src="gfg.png"
+         draggable="true"
+         ondragstart="drag(event)"
+         width="250"
+         height="200"
+         >
+</body>
+</html>

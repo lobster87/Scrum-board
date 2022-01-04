@@ -4,7 +4,7 @@
 document.addEventListener("click", addTask);
 document.addEventListener("click", del);
 
-
+tasksNumber = 0
 // Button functions
 function addTask(e){
     // function to add a task to task list
@@ -13,12 +13,11 @@ function addTask(e){
     if (item.id === "enter"){
         var node = document.getElementById("task-list")
         var task = document.getElementById("taskEntry").value;
-
+        tasksNumber += 1
         // Create element1 to be added
         var add = document.createElement('div')
         add.className = "added-task"  
-        add.draggable = "true"
-        add.ondragstart ="drag(event)" 
+        add.id = 'task'+tasksNumber
         add.innerHTML = "" + task + " <button class='delete'>delete</button>"
 
         // Delete text input 
@@ -37,7 +36,7 @@ function del(e){
     // delete TODO
     if (item.classList[0] === "delete"){
         const todo = item.parentElement;
-        todo.remove()
+        todo.remove();
     }
 }
 
