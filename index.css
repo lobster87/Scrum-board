@@ -100,13 +100,17 @@ body, html {
     width: 90%;
     height: fit-content;
     padding: 5px;
-    margin-top: 5px;
+    margin-top: 10px;
     background-color: #a090a5;
     margin-left: auto;
     margin-right: auto;
-    border: solid 2px black;
+    border: solid 2px gray;
     border-radius: 5px;
     color: white;
+}
+
+.added-task:hover {
+    box-shadow: 5px 5px 5px black;
 }
 
 .delete {
@@ -115,3 +119,5 @@ body, html {
     border-radius: 5px;
     float: right;
 }
+
+/*this is an updated file*/
