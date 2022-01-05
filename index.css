@@ -84,8 +84,8 @@ body, html {
     color: white;
 }
 
-#task-list, #inProgress-list, #complete-list {
-    height: 100%;
+.task-list {
+    min-height: 100%;
 }
 
 @media screen and (max-width: 1120px) {

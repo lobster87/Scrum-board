@@ -1,15 +1,16 @@
 // This page provides the dynamic functionality for the scrumboard
 const containers = document.querySelectorAll('.task-list')
-var tasks = [...document.querySelectorAll('.added-task')]
+console.log(containers)
+var tasks = document.querySelectorAll('.added-task')
+
 // event listeners
 document.addEventListener("click", addTask);
 document.addEventListener("click", del);
 
 // Button functions
-function addTask(e){
+function addTask(e){ // working
     // function to add a task to task list
     const item = e.target;
-
     if (item.id === "enter"){
         var node = document.getElementById("new-task")
         var task = document.getElementById("taskEntry").value;
@@ -23,13 +24,13 @@ function addTask(e){
         document.getElementById('taskEntry').value = "";
 
         // Add the new HTML element
-        tasks[tasks.length] = add;
         node.appendChild(add)
+        tasks = document.querySelectorAll('.added-task')
         e.preventDefault();
     }
 }
 
-function del(e){
+function del(e){ //working
     // function to delete task
     const item = e.target;
 
@@ -41,21 +42,22 @@ function del(e){
 }
 
 /* drag functions */
-tasks.forEach(task => {
+tasks.forEach(task => { 
     task.addEventListener('dragstart', () => {
+        console.log('start')
         task.classList.add('dragging')
     })
 
     task.addEventListener('dragend', () => {
+        console.log('end')
         task.classList.remove('dragging')
     })
 })
 
-containers.forEach(container => {
+containers.forEach(container => { // not working as there is no dragging class being applied
     container.addEventListener('dragover', e => {
         e.preventDefault()
         const afterElement = getDragAfterElement(container, e.clientY)
-        
         const dragable = document.querySelector(".dragging")
         console.log(dragable)
         if (afterElement == null){
