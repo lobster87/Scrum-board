@@ -42,7 +42,7 @@ function del(e){
 
 /* drag functions */
 containers.forEach(container => {
-    try {   
+    try {
         container.addEventListener('dragover', e => {
             e.preventDefault()
             const afterElement = getDragAfterElement(container, e.clientY)
@@ -52,7 +52,7 @@ containers.forEach(container => {
             } else {
                 container.insertBefore(dragable, afterElement)
             }
-        }) 
+        })      
     }catch{
 
     }  
