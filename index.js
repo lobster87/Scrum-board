@@ -1,7 +1,6 @@
 // This page provides the dynamic functionality for the scrumboard
-const containers = document.querySelectorAll('.task-list')
-console.log(containers)
-var tasks = document.querySelectorAll('.added-task')
+var containers = document.querySelectorAll('.task-list')
+var tasks = document.getElementsByClassName('added-task')
 
 // event listeners
 document.addEventListener("click", addTask);
@@ -17,7 +16,7 @@ function addTask(e){ // working
 
         // Create element1 to be added
         var add = document.createElement('div')
-        add.className = "added-task"  
+        add.className = "added-task" 
         add.innerHTML = "" + task + " <button class='delete'>delete</button>"
         add.draggable = "true"
         // Delete text input 
@@ -25,12 +24,12 @@ function addTask(e){ // working
 
         // Add the new HTML element
         node.appendChild(add)
-        tasks = document.querySelectorAll('.added-task')
+        tasks = document.getElementsByClassName('added-task')
         e.preventDefault();
     }
 }
 
-function del(e){ //working
+function del(e){
     // function to delete task
     const item = e.target;
 
@@ -42,34 +41,25 @@ function del(e){ //working
 }
 
 /* drag functions */
-tasks.forEach(task => { 
-    task.addEventListener('dragstart', () => {
-        console.log('start')
-        task.classList.add('dragging')
-    })
+containers.forEach(container => {
+    try {   
+        container.addEventListener('dragover', e => {
+            e.preventDefault()
+            const afterElement = getDragAfterElement(container, e.clientY)
+            const dragable = document.querySelector(".dragging")
+            if (afterElement == null){
+                container.appendChild(dragable)
+            } else {
+                container.insertBefore(dragable, afterElement)
+            }
+        }) 
+    }catch{
 
-    task.addEventListener('dragend', () => {
-        console.log('end')
-        task.classList.remove('dragging')
-    })
-})
-
-containers.forEach(container => { // not working as there is no dragging class being applied
-    container.addEventListener('dragover', e => {
-        e.preventDefault()
-        const afterElement = getDragAfterElement(container, e.clientY)
-        const dragable = document.querySelector(".dragging")
-        console.log(dragable)
-        if (afterElement == null){
-            container.appendChild(dragable)
-        } else {
-            container.insertBefore(dragable, afterElement)
-        }
-    })
+    }  
 })
 
 function getDragAfterElement(container, y) {
-    const draggableElements = [...container.querySelectorAll('.added-task:not(.dragging)')] // [] turn in to array
+    const draggableElements = [...container.querySelectorAll('.added-task:not(.dragging)')]
     return draggableElements.reduce((closest, child) => {
         const box = child.getBoundingClientRect()
         const offset = y - box.top - box.height/2
@@ -80,3 +70,17 @@ function getDragAfterElement(container, y) {
         }
     }, {offset: Number.NEGATIVE_INFINITY}).element
 }
+
+document.addEventListener('dragstart', (e) => {
+    item = e.target
+    if (item.className === "added-task"){
+        item.classList.add('dragging')
+        
+        item.addEventListener('dragend', (e) => {
+            item.classList.remove('dragging')
+        })
+    } else {
+
+    }
+})
+
